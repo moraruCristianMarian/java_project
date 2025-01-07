@@ -24,6 +24,13 @@ public class Ingredient {
 
     public Ingredient() {
     }
+    public Ingredient(Integer id, String name, Boolean isMeat, Boolean isDairy, Boolean isGluten) {
+        this.id = id;
+        this.name = name;
+        this.isMeat = isMeat;
+        this.isDairy = isDairy;
+        this.isGluten = isGluten;
+    }
 
     public Integer getId() {
         return id;

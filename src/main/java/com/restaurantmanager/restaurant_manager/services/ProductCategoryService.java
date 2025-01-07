@@ -23,7 +23,7 @@ public class ProductCategoryService implements IProductCategoryService {
     }
 
     @Override
-    public List<ProductCategory> getAllProductCategorysUsingJpa() {
+    public List<ProductCategory> getAllProductCategoriesUsingJpa() {
         return this.productCategoryRepository.findAll();
     }
 

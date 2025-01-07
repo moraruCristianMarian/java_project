@@ -7,7 +7,7 @@ import java.util.List;
 public interface IProductCategoryService {
     List<ProductCategory> getById(Integer id);
 
-    List<ProductCategory> getAllProductCategorysUsingJpa();
+    List<ProductCategory> getAllProductCategoriesUsingJpa();
 
     ProductCategory createProductCategory(ProductCategory product);
 

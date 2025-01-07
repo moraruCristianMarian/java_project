@@ -12,7 +12,7 @@ import javax.validation.Valid;
 import java.util.List;
 
 @Controller
-@RequestMapping("/productCategorys")
+@RequestMapping("/productCategories")
 public class ProductCategoryController {
     @Autowired
     private ProductCategoryService productCategoryService;
@@ -31,10 +31,10 @@ public class ProductCategoryController {
     }
 
     @GetMapping
-    public ResponseEntity<List<ProductCategory>> getAllProductCategorys() {
-        List<ProductCategory> productCategorys = productCategoryService.getAllProductCategorysUsingJpa();
+    public ResponseEntity<List<ProductCategory>> getAllProductCategories() {
+        List<ProductCategory> productCategories = productCategoryService.getAllProductCategoriesUsingJpa();
         return ResponseEntity.status(HttpStatus.OK)
-                             .body(productCategorys);
+                             .body(productCategories);
     }
 
     @PostMapping

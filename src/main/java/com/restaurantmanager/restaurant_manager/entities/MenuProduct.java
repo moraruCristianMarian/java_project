@@ -34,6 +34,14 @@ public class MenuProduct {
     public MenuProduct() {
     }
 
+    public MenuProduct(MenuProductId id, Product product, Restaurant restaurant, Double discount, LocalDateTime promotionEndDate) {
+        this.id = id;
+        this.product = product;
+        this.restaurant = restaurant;
+        this.discount = discount;
+        this.promotionEndDate = promotionEndDate;
+    }
+
     public MenuProductId getId() {
         return id;
     }

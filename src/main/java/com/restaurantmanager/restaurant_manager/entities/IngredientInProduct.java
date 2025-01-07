@@ -22,6 +22,14 @@ public class IngredientInProduct {
 
     public IngredientInProduct() {
     }
+    public IngredientInProduct(IngredientInProductId id) {
+        this.id = id;
+    }
+    public IngredientInProduct(IngredientInProductId id, Ingredient ingredient, Product product) {
+        this.id = id;
+        this.ingredient = ingredient;
+        this.product = product;
+    }
 
     public IngredientInProductId getId() {
         return id;

@@ -16,6 +16,10 @@ public class ProductCategory {
 
     public ProductCategory() {
     }
+    public ProductCategory(Integer id, String name) {
+        this.id = id;
+        this.name = name;
+    }
 
     public Integer getId() {
         return id;

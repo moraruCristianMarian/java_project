@@ -25,6 +25,12 @@ public class Restaurant {
 
     public Restaurant() {
     }
+    public Restaurant(Integer id, String name, LocalTime openingTime, LocalTime closingTime) {
+        this.id = id;
+        this.name = name;
+        this.openingTime = openingTime;
+        this.closingTime = closingTime;
+    }
 
     public Integer getId() {
         return id;
