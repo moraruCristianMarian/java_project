@@ -32,8 +32,18 @@ public class MenuProductController {
     }
 
     @GetMapping
-    public ResponseEntity<List<MenuProduct>> getAllMenuProducts() {
-        List<MenuProduct> menuProducts = menuProductService.getAllMenuProductsUsingJpa();
+    public ResponseEntity<List<MenuProduct>> getAllMenuProducts(
+            @RequestParam(value = "minCost", required = false) Double minCost,
+            @RequestParam(value = "maxCost", required = false) Double maxCost)
+    {
+        List<MenuProduct> menuProducts;
+
+        if (minCost != null || maxCost != null) {
+            menuProducts = menuProductService.getAllMenuProductsUsingJpaFilterCost(minCost, maxCost);
+        } else {
+            menuProducts = menuProductService.getAllMenuProductsUsingJpa();
+        }
+
         return ResponseEntity.status(HttpStatus.OK)
                              .body(menuProducts);
     }

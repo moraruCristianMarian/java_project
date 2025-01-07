@@ -3,6 +3,7 @@ package com.restaurantmanager.restaurant_manager.services;
 import com.restaurantmanager.restaurant_manager.entities.MenuProduct;
 
 import com.restaurantmanager.restaurant_manager.entities.MenuProductId;
+import com.restaurantmanager.restaurant_manager.entities.Product;
 import com.restaurantmanager.restaurant_manager.repository.MenuProductRepository;
 
 import com.restaurantmanager.restaurant_manager.repository.ProductRepository;
@@ -10,6 +11,7 @@ import com.restaurantmanager.restaurant_manager.repository.RestaurantRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.stream.Collectors;
@@ -33,6 +35,22 @@ public class MenuProductService implements IMenuProductService {
     @Override
     public List<MenuProduct> getAllMenuProductsUsingJpa() {
         return this.menuProductRepository.findAll();
+    }
+
+    public List<MenuProduct> getAllMenuProductsUsingJpaFilterCost(Double minCost, Double maxCost) {
+        if (minCost == null)
+            minCost = 0.0;
+        if (maxCost == null)
+            maxCost = 9999.0;
+
+        Double finalMaxCost = maxCost;
+        Double finalMinCost = minCost;
+        return this.menuProductRepository.findAll()
+                .stream()
+                .sorted(Comparator.comparing(mp -> mp.getDiscount() * mp.getProduct().getCost()))
+                .filter(mp -> ((1 - mp.getDiscount()) * mp.getProduct().getCost() > finalMinCost) &&
+                              ((1 - mp.getDiscount()) * mp.getProduct().getCost() < finalMaxCost))
+                .collect(Collectors.toList());
     }
 
     public MenuProduct createMenuProduct(MenuProduct menuProduct) {

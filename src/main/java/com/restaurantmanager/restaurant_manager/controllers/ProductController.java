@@ -31,8 +31,23 @@ public class ProductController {
     }
 
     @GetMapping
-    public ResponseEntity<List<Product>> getAllProducts() {
-        List<Product> products = productService.getAllProductsUsingJpa();
+    public ResponseEntity<List<Product>> getAllProducts(
+            @RequestParam(value = "sorted", required = false, defaultValue = "false") boolean sorted,
+            @RequestParam(value = "excludedIngredient", required = false) Integer excludedIngredient
+            )
+    {
+        List<Product> products;
+
+        if (sorted)
+            products = productService.getAllProductsUsingJpaByCost();
+        else
+        {
+            if (excludedIngredient != null)
+                products = productService.getProductsFilterIngredient(excludedIngredient);
+            else
+                products = productService.getAllProductsUsingJpa();
+        }
+
         return ResponseEntity.status(HttpStatus.OK)
                              .body(products);
     }
