@@ -1,6 +1,8 @@
 package com.restaurantmanager.restaurant_manager.entities;
 
 import javax.persistence.*;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "products")
@@ -13,10 +15,12 @@ public class Product {
     @JoinColumn(name = "product_category_id")
     private ProductCategory productCategory;
 
-    @Column(name = "name", nullable = false)
+    @Column(name = "name")
+    @Size(min = 2, max = 100)
     private String name;
 
-    @Column(name = "cost", nullable = false)
+    @Column(name = "cost")
+    @Min(0)
     private Double cost;
 
     public Product() {

@@ -1,5 +1,6 @@
 package com.restaurantmanager.restaurant_manager.json;
 
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 
 public class Product {
@@ -11,6 +12,7 @@ public class Product {
     @NotBlank
     private String name;
     @NotBlank
+    @Min(0)
     private Double cost;
 
     public Product() {

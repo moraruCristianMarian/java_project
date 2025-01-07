@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @Controller
@@ -37,14 +38,14 @@ public class ProductController {
     }
 
     @PostMapping
-    public ResponseEntity<Product> createProduct(@RequestBody Product product) {
+    public ResponseEntity<Product> createProduct(@RequestBody @Valid Product product) {
         Product createdProduct = productService.createProduct(product);
         return ResponseEntity.status(HttpStatus.CREATED)
                              .body(createdProduct);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Product> updateProduct(@PathVariable Integer id, @RequestBody Product updatedProduct) {
+    public ResponseEntity<Product> updateProduct(@PathVariable Integer id, @RequestBody @Valid Product updatedProduct) {
         try {
             Product product = productService.updateProduct(id, updatedProduct);
             return ResponseEntity.status(HttpStatus.OK)
@@ -62,7 +63,7 @@ public class ProductController {
             return ResponseEntity.status(HttpStatus.NO_CONTENT)
                                  .body(null);
         } catch (IllegalArgumentException e) {
-            return ResponseEntity.status(HttpStatus.NO_CONTENT)
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
                                  .body(null);
         }
     }
